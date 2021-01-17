@@ -4,10 +4,10 @@
 
     https://console.cloud.google.com/apis/credentials/serviceaccountkey link to generate json key. Make sure project name is same as mentioned in m1.py file
 
-2- First run command 
+3- First run command 
     'gcloud init' to set up project
     
-3- Then run command 
+4- Then run command 
      'gcloud app deploy' to deploy to app engine in same directory.
      
 After this it will deploy on google app engine
