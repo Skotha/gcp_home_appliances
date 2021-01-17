@@ -1,0 +1,14 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+.vscode
+m.py
+output.json
+vision_credentials.json
+gcp.zip
+test.ipynb
+cmd.exe
+result.csv
+key.json
+gcp/
+python-docs-samples/
+hello/

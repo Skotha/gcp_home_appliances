@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Predict Appliances</title>
+	
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/Chart.min.css" />
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/Chart.min.js"></script>
+</head>
+
+<body>
+    <h1>Upload CSV File to Predict Appliance States</h1>
+    <form id="myForm">
+        <p><input type="file" id="myFile" name="file" accept=".csv" /></p>
+        <p><input class="btn btn-success" type="submit" id="mySubmit" value="Upload" /></p>
+    </form>
+    <hr />
+    <br />
+    <button style="display:none;" class="btn btn-primary" type="button" onclick="a();">Show result in JSON format</button>
+	<div style="height:400px; width:400px;">
+		<canvas id="myChart1" ></canvas>
+	<div>
+	<div style="height:400px; width:400px;">
+		<canvas id="myChart2" ></canvas>
+	<div>
+	<div style="height:400px; width:400px;">
+		<canvas id="myChart3" ></canvas>
+	<div>
+	<div style="height:400px; width:400px;">
+		<canvas id="myChart4" ></canvas>
+	<div>
+	<div style="height:400px; width:400px;">
+		<canvas id="myChart5" ></canvas>
+	<div>
+	<div style="height:400px; width:400px;">
+		<canvas id="myChart6" ></canvas>
+	<div>
+	<div style="height:400px; width:400px;">
+		<canvas id="myChart7" ></canvas>
+	<div>
+	<div style="height:400px; width:400px;">
+		<canvas id="myChart8" ></canvas>
+	<div>
+	<script>
+	function a() {
+	 var d=$.ajax({
+                       async:false,
+                       url:'/json',
+                       type:'get',
+                       dataType:"JSON"
+                       }).responseJSON;
+		console.log(d);
+		let ctx;
+		console.log([...Array(6).keys()]);
+		let myChart;
+		for (let i = 0; i < 8; i++){
+			ctx = $('#myChart'+(i+1));
+			myChart = new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: [...d[i].keys()],
+				datasets: [{
+					label: 'Appliance '+(i+1),
+					data: d[i],
+					backgroundColor: [
+						'rgba(0, 99, 255, 0.2)',
+						'rgba(54, 162, 235, 0.2)',
+						'rgba(255, 206, 86, 0.2)',
+						'rgba(75, 192, 192, 0.2)',
+						'rgba(153, 102, 255, 0.2)',
+						'rgba(255, 159, 64, 0.2)'
+					],
+					borderColor: [
+						'rgba(0, 0, 255, 1)',
+						'rgba(54, 162, 235, 1)',
+						'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)',
+						'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)'
+					],
+					borderWidth: 1,
+					steppedLine: true,
+					pointRadius: 0
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{ 
+					  ticks: {
+							beginAtZero: true
+						},
+					
+					gridLines: {
+						display: true,
+					  },
+					}],
+					xAxes: [{
+						display:false
+					}],
+				}
+			}
+		});
+	}
+	}
+	$('form').submit(function(evt) {
+	evt.preventDefault();
+	  let data = new FormData($(this)[0]);
+		if(document.getElementById("myFile").files.length != 0)
+	  $.ajax({
+		url: '',
+		type: 'POST',
+		data: data,
+		async: false,
+        cache: false,
+        contentType: false,
+        enctype: 'multipart/form-data',
+        processData: false,
+		success: function(r) {
+			console.log(r);
+		  $('.btn').show();
+		  a();
+		},
+		error: function(r) {
+		  console.log('error: ', r);
+		}
+	  });
+	});
+	
+	</script>
+	
+</body>
+
+</html>

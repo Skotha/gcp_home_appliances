@@ -1,0 +1,15 @@
+1- authentication file from gcp in json format
+
+2- rename this file to "key.json" and put it in the same directory as main.py file
+
+3- https://console.cloud.google.com/apis/credentials/serviceaccountkey
+
+4- now open google cloud sdk and go to same directory as main.py
+
+5- run command "gcloud init"
+
+6- it will ask for authentication
+
+7- after authentication select your project, this project needs to be same as in "key.json" file
+
+8- run command "gcloud app deploy", this will take few minutes
